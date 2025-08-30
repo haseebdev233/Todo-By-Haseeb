@@ -1,0 +1,554 @@
+// styles/App.scss
+// Variables
+$primary: #6c5ce7;
+$secondary: #8a7cff;
+$accent: #fd79a8;
+$light: #f8f9fa;
+$dark: #2d3436;
+$success: #00b894;
+$danger: #d63031;
+$warning: #fdcb6e;
+$info: #0984e3;
+$gradient-start: #6a11cb;
+$gradient-end: #2575fc;
+
+// CSS custom properties for JavaScript access
+:root {
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --accent: #{$accent};
+  --success: #{$success};
+  --danger: #{$danger};
+  --warning: #{$warning};
+  --info: #{$info};
+  --info-rgb: 9, 132, 227;
+}
+
+// Global styles
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+//   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(120deg, $gradient-start, $gradient-end);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: $dark;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+// Page transitions
+.page-container {
+  transition: all 0.3s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+// Header styles
+.app-header {
+  background: linear-gradient(120deg, $gradient-start, $gradient-end);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    
+    i {
+    //   color: lighten($accent, 10%);
+    background: linear-gradient(120deg, $gradient-start, $gradient-end);
+      animation: pulse 2s infinite;
+    }
+    
+    .brand-text {
+      background: linear-gradient(45deg, #fff, $accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+  
+  .nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: $accent;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+    
+    &:hover,
+    &.active {
+      color: white !important;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Hero section
+.hero-section {
+  padding: 3rem 0;
+  animation: fadeIn 1s ease;
+  
+  .text-gradient {
+    background: linear-gradient(45deg, $primary, $accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .lead {
+    font-size: 1.5rem;
+    color: rgba($dark, 0.8);
+  }
+  
+  .hero-buttons {
+    .btn {
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba($primary, 0.2);
+      }
+    }
+  }
+}
+
+// Todo card styles
+.todo-card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  animation: fadeIn 0.7s ease;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    color: $primary;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.5rem;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(45deg, $primary, $accent);
+      border-radius: 2px;
+    }
+  }
+}
+
+.todo-form {
+  .form-control {
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    
+    &:focus {
+      border-color: $secondary;
+      box-shadow: 0 0 0 0.25rem rgba($secondary, 0.25);
+      transform: translateY(-2px);
+    }
+  }
+  
+  .btn {
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba($primary, 0.2);
+    }
+  }
+}
+
+// Todo list styles
+.todo-list {
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+    
+    th {
+      background: linear-gradient(120deg, $primary, $secondary);
+      color: white;
+      font-weight: 600;
+      border: none;
+      padding: 1rem;
+    }
+    
+    td {
+      padding: 1rem;
+      vertical-align: middle;
+      border-color: rgba($primary, 0.1);
+    }
+    
+    tr {
+      transition: all 0.3s ease;
+      
+      &:hover {
+        // background-color: lighten($secondary, 35%);
+        background: linear-gradient(120deg, $gradient-start, $gradient-end);
+        transform: translateX(5px);
+      }
+      
+      &.completed {
+        .todo-title, .todo-description, .todo-location {
+          text-decoration: line-through;
+          color: #6c757d;
+        }
+      }
+    }
+  }
+  
+  .badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+  }
+  
+  .btn-group {
+    .btn {
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// Team cards
+.team-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-img {
+    width: 80px;
+    height: 80px;
+    transition: all 0.3s ease;
+  }
+  
+  &:hover .team-img {
+    transform: scale(1.1);
+  }
+}
+
+// Feature cards
+.feature-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  border: none;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-icon {
+    transition: all 0.3s ease;
+  }
+  
+  &:hover .feature-icon {
+    transform: scale(1.2);
+  }
+}
+
+// Text gradient
+.text-gradient {
+  background: linear-gradient(45deg, $primary, $accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Animation classes
+.animate__animated {
+  animation-duration: 0.5s;
+}
+
+// Editing state for todo items
+.todo-item.editing {
+  background-color: rgba($info, 0.1) !important;
+  
+  input {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+// Social links
+.social-links a {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+// Contact info
+.contact-info {
+  font-size: 0.9rem;
+  
+  i {
+    width: 20px;
+  }
+}
+
+// Footer styles
+.app-footer {
+//   background: linear-gradient(120deg, $dark, darken($dark, 8%));
+background: linear-gradient(120deg, $gradient-start, $gradient-end);
+  color: white;
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;
+  
+  h5 {
+    // color: lighten($secondary, 20%);
+    background: linear-gradient(120deg, $gradient-start, $gradient-end);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: $accent;
+      border-radius: 2px;
+    }
+  }
+  
+  a {
+    color: rgba(white, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    
+    &:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+  }
+  
+  .social-links {
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(white, 0.1);
+      margin-right: 0.75rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: $accent;
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba($accent, 0.3);
+      }
+    }
+  }
+  
+  hr {
+    border-color: rgba(white, 0.15);
+    margin: 2rem 0;
+  }
+}
+// Add these styles to your App.scss
+// Toastify custom styles
+.Toastify__toast {
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  
+  &--success {
+    // background: linear-gradient(120deg, $success, darken($success, 10%)) !important;
+    background: linear-gradient(120deg, $gradient-start, $gradient-end);
+  }
+  
+  &--error {
+    // background: linear-gradient(120deg, $danger, darken($danger, 10%)) !important;
+    background: linear-gradient(120deg, $gradient-start, $gradient-end);
+  }
+  
+  &--info {
+    // background: linear-gradient(120deg, $info, darken($info, 10%)) !important;
+    background: linear-gradient(120deg, $gradient-start, $gradient-end);
+  }
+  
+  &--warning {
+    // background: linear-gradient(120deg, $warning, darken($warning, 10%)) !important;
+    background: linear-gradient(120deg, $gradient-start, $gradient-end);
+    color: $dark !important;
+    
+    .Toastify__progress-bar {
+      background: rgba($dark, 0.3) !important;
+    }
+  }
+}
+
+.Toastify__close-button {
+  align-self: center !important;
+}
+
+// Custom toast animation
+.Toastify__bounce-enter--top-right {
+  animation: toastInRight 0.7s both;
+}
+
+@keyframes toastInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+  .hero-section {
+    .display-4 {
+      font-size: 2.5rem;
+    }
+    
+    .lead {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem 0;
+  }
+  
+  .todo-card {
+    .card-body {
+      padding: 1.5rem;
+    }
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    
+    .table {
+      min-width: 700px;
+    }
+  }
+  
+  .filter-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    
+    .btn-group {
+      order: -1;
+    }
+  }
+  
+  .team-card, .feature-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-info {
+    text-align: center;
+  }
+  
+  .app-footer {
+    text-align: center;
+    
+    h5::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .social-links {
+      justify-content: center;
+    }
+  }
+}
